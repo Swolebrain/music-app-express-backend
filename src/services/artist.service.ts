@@ -5,7 +5,7 @@ import { Artist, CreateArtistDto, UpdateArtistDto } from '../models/artist.model
 export const artists: Artist[] = [];
 
 // Initialize with some mock artists
-const initMockArtists = () => {
+function initMockArtists() {
   if (artists.length === 0) {
     const mockArtists: CreateArtistDto[] = [
       {
@@ -38,7 +38,7 @@ const initMockArtists = () => {
       createArtist(artistData);
     });
   }
-};
+}
 
 // Initialize mock data
 initMockArtists();
@@ -46,21 +46,21 @@ initMockArtists();
 /**
  * Get all artists
  */
-export const findAllArtists = (): Artist[] => {
+export function findAllArtists(): Artist[] {
   return artists;
-};
+}
 
 /**
  * Find artist by ID
  */
-export const findArtistById = (id: string): Artist | undefined => {
+export function findArtistById(id: string): Artist | undefined {
   return artists.find(artist => artist.id === id);
-};
+}
 
 /**
  * Create a new artist
  */
-export const createArtist = (artistData: CreateArtistDto): Artist => {
+export function createArtist(artistData: CreateArtistDto): Artist {
   const newArtist: Artist = {
     id: uuidv4(),
     name: artistData.name,
@@ -72,12 +72,12 @@ export const createArtist = (artistData: CreateArtistDto): Artist => {
 
   artists.push(newArtist);
   return newArtist;
-};
+}
 
 /**
  * Update an existing artist
  */
-export const updateArtist = (id: string, updateData: UpdateArtistDto): Artist | null => {
+export function updateArtist(id: string, updateData: UpdateArtistDto): Artist | null {
   const artistIndex = artists.findIndex(artist => artist.id === id);
   
   if (artistIndex === -1) {
@@ -100,12 +100,12 @@ export const updateArtist = (id: string, updateData: UpdateArtistDto): Artist | 
   artists[artistIndex] = updatedArtist;
   
   return updatedArtist;
-};
+}
 
 /**
  * Delete an artist
  */
-export const deleteArtist = (id: string): boolean => {
+export function deleteArtist(id: string): boolean {
   const initialLength = artists.length;
   const remainingArtists = artists.filter(artist => artist.id !== id);
   
@@ -114,4 +114,4 @@ export const deleteArtist = (id: string): boolean => {
   artists.push(...remainingArtists);
   
   return artists.length < initialLength;
-}; 
+} 

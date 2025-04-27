@@ -8,7 +8,7 @@ const favorites: string[] = []; // List of favorited track IDs
 const streamEvents: { trackId: string, timestamp: Date }[] = [];
 
 // Initialize with some mock tracks
-const initMockTracks = () => {
+function initMockTracks() {
   // Wait until we have artists before creating mock tracks
   setTimeout(() => {
     if (musicTracks.length === 0 && artists.length > 0) {
@@ -68,7 +68,7 @@ const initMockTracks = () => {
       }
     }
   }, 100); // Small delay to ensure artists are loaded
-};
+}
 
 // Initialize mock data
 initMockTracks();
@@ -76,7 +76,7 @@ initMockTracks();
 /**
  * Create a new music track
  */
-export const createTrack = (trackData: CreateMusicTrackDto): MusicTrack => {
+export function createTrack(trackData: CreateMusicTrackDto): MusicTrack {
   // Verify that the artist exists
   const artist = findArtistById(trackData.artistId);
   if (!artist) {
@@ -96,33 +96,33 @@ export const createTrack = (trackData: CreateMusicTrackDto): MusicTrack => {
 
   musicTracks.push(newTrack);
   return newTrack;
-};
+}
 
 /**
  * Find a track by ID
  */
-export const findTrackById = (id: string): MusicTrack | undefined => {
+export function findTrackById(id: string): MusicTrack | undefined {
   return musicTracks.find(track => track.id === id);
-};
+}
 
 /**
  * Find all tracks
  */
-export const findAllTracks = (): MusicTrack[] => {
+export function findAllTracks(): MusicTrack[] {
   return musicTracks;
-};
+}
 
 /**
  * Find tracks by artist ID
  */
-export const findTracksByArtistId = (artistId: string): MusicTrack[] => {
+export function findTracksByArtistId(artistId: string): MusicTrack[] {
   return musicTracks.filter(track => track.artistId === artistId);
-};
+}
 
 /**
  * Get stream details for a track
  */
-export const streamTrack = (id: string): StreamResponse | null => {
+export function streamTrack(id: string): StreamResponse | null {
   const track = findTrackById(id);
   
   if (!track) {
@@ -149,12 +149,12 @@ export const streamTrack = (id: string): StreamResponse | null => {
     artistId: track.artistId,
     artistName: artist?.name
   };
-};
+}
 
 /**
  * Get mock download details for a track
  */
-export const downloadTrack = (id: string): { filePath: string, fileName: string, artistName?: string } | null => {
+export function downloadTrack(id: string): { filePath: string, fileName: string, artistName?: string } | null {
   const track = findTrackById(id);
   
   if (!track) {
@@ -174,12 +174,12 @@ export const downloadTrack = (id: string): { filePath: string, fileName: string,
     fileName,
     artistName
   };
-};
+}
 
 /**
  * Mark a track as favorite
  */
-export const favoriteTrack = (id: string): FavoriteResponse | null => {
+export function favoriteTrack(id: string): FavoriteResponse | null {
   const trackIndex = musicTracks.findIndex(track => track.id === id);
   
   if (trackIndex === -1) {
@@ -214,12 +214,12 @@ export const favoriteTrack = (id: string): FavoriteResponse | null => {
       ? `Track "${track.title}" by ${artistName} added to favorites` 
       : `Track "${track.title}" by ${artistName} removed from favorites`
   };
-};
+}
 
 /**
  * Get artist analytics
  */
-export const getArtistAnalytics = (artistId?: string): ArtistAnalytics => {
+export function getArtistAnalytics(artistId?: string): ArtistAnalytics {
   // Filter tracks by artist if artistId is provided
   const artistTracks = artistId 
     ? musicTracks.filter(track => track.artistId === artistId)
@@ -265,4 +265,4 @@ export const getArtistAnalytics = (artistId?: string): ArtistAnalytics => {
     totalStreamTime,
     averageTrackDuration
   };
-}; 
+} 

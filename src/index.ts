@@ -14,8 +14,8 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
 
-// Routes
-app.use('/api', routes);
+// Routes - mounting directly on the root path instead of /api
+app.use('/', routes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

@@ -6,7 +6,7 @@ import { CreateMusicTrackDto } from '../models/music.model';
 /**
  * Get all tracks
  */
-export const getAllTracks = (req: Request, res: Response): void => {
+export function getAllTracks(req: Request, res: Response): void {
   try {
     const tracks = musicService.findAllTracks();
     res.status(200).json(tracks);
@@ -14,12 +14,12 @@ export const getAllTracks = (req: Request, res: Response): void => {
     console.error('Error getting tracks:', error);
     res.status(500).json({ message: 'Failed to retrieve tracks' });
   }
-};
+}
 
 /**
  * Get tracks by artist ID
  */
-export const getTracksByArtistId = (req: Request, res: Response): void => {
+export function getTracksByArtistId(req: Request, res: Response): void {
   try {
     const { artistId } = req.params;
     
@@ -41,12 +41,12 @@ export const getTracksByArtistId = (req: Request, res: Response): void => {
     console.error('Error getting tracks by artist:', error);
     res.status(500).json({ message: 'Failed to retrieve tracks' });
   }
-};
+}
 
 /**
  * Create a new music track
  */
-export const createTrack = (req: Request, res: Response): void => {
+export function createTrack(req: Request, res: Response): void {
   try {
     const trackData: CreateMusicTrackDto = req.body;
     
@@ -69,12 +69,12 @@ export const createTrack = (req: Request, res: Response): void => {
     console.error('Error creating track:', error);
     res.status(500).json({ message: 'Failed to create track' });
   }
-};
+}
 
 /**
  * Stream a music track
  */
-export const streamTrack = (req: Request, res: Response): void => {
+export function streamTrack(req: Request, res: Response): void {
   try {
     const { id } = req.params;
     
@@ -95,12 +95,12 @@ export const streamTrack = (req: Request, res: Response): void => {
     console.error('Error streaming track:', error);
     res.status(500).json({ message: 'Failed to stream track' });
   }
-};
+}
 
 /**
  * Download a music track
  */
-export const downloadTrack = (req: Request, res: Response): void => {
+export function downloadTrack(req: Request, res: Response): void {
   try {
     const { id } = req.params;
     
@@ -128,12 +128,12 @@ export const downloadTrack = (req: Request, res: Response): void => {
     console.error('Error downloading track:', error);
     res.status(500).json({ message: 'Failed to download track' });
   }
-};
+}
 
 /**
  * Mark a track as favorite
  */
-export const favoriteTrack = (req: Request, res: Response): void => {
+export function favoriteTrack(req: Request, res: Response): void {
   try {
     const { id } = req.params;
     
@@ -154,4 +154,4 @@ export const favoriteTrack = (req: Request, res: Response): void => {
     console.error('Error favoriting track:', error);
     res.status(500).json({ message: 'Failed to update favorite status' });
   }
-}; 
+} 

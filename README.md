@@ -78,37 +78,37 @@ yarn start
 
 ### Music Endpoints
 
-- `GET /api/music` - Get all music tracks
-- `POST /api/music` - Create a new music track
+- `GET /music` - Get all music tracks
+- `POST /music` - Create a new music track
   - Request body: `{ "title": "Song Title", "artistId": "artist-uuid", "genre": "Pop", "duration": 180 }`
 
-- `GET /api/music/:id/stream` - Stream a music track
+- `GET /music/:id/stream` - Stream a music track
   - Returns: JSON with a mocked streaming URL
 
-- `GET /api/music/:id/download` - Download a music track
+- `GET /music/:id/download` - Download a music track
   - Returns: JSON with a mocked download path for an MP4 file
 
-- `POST /api/music/:id/favorite` - Mark a track as favorite
+- `POST /music/:id/favorite` - Mark a track as favorite
   - Toggles the favorite status of the track
 
 ### Artist Endpoints
 
-- `GET /api/artists` - Get all artists
-- `POST /api/artists` - Create a new artist
+- `GET /artists` - Get all artists
+- `POST /artists` - Create a new artist
   - Request body: `{ "name": "Artist Name", "genre": "Pop", "bio": "Artist biography" }`
-- `GET /api/artists/:id` - Get an artist by ID
-- `PUT /api/artists/:id` - Update an artist
+- `GET /artists/:id` - Get an artist by ID
+- `PUT /artists/:id` - Update an artist
   - Request body: `{ "name": "Updated Name", "genre": "Updated Genre", "bio": "Updated bio" }`
-- `DELETE /api/artists/:id` - Delete an artist
-- `GET /api/artists/:artistId/tracks` - Get all tracks for an artist
+- `DELETE /artists/:id` - Delete an artist
+- `GET /artists/:artistId/tracks` - Get all tracks for an artist
 
-- `GET /api/artist/analytics` - Get analytics for the current user
+- `GET /artist/analytics` - Get analytics for the current user
   - Returns: Statistics about tracks, favorites, and streaming
 
 ### Other Endpoints
 
 - `GET /health` - Health check endpoint
-- `GET /api` - Welcome message
+- `GET /` - Welcome message
 
 ## Testing
 

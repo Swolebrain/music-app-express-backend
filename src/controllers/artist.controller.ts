@@ -6,7 +6,7 @@ import { CreateArtistDto, UpdateArtistDto } from '../models/artist.model';
 /**
  * Get all artists
  */
-export const getAllArtists = (req: Request, res: Response): void => {
+export function getAllArtists(req: Request, res: Response): void {
   try {
     const artists = artistService.findAllArtists();
     res.status(200).json(artists);
@@ -14,12 +14,12 @@ export const getAllArtists = (req: Request, res: Response): void => {
     console.error('Error getting artists:', error);
     res.status(500).json({ message: 'Failed to retrieve artists' });
   }
-};
+}
 
 /**
  * Get artist by ID
  */
-export const getArtistById = (req: Request, res: Response): void => {
+export function getArtistById(req: Request, res: Response): void {
   try {
     const { id } = req.params;
     
@@ -40,12 +40,12 @@ export const getArtistById = (req: Request, res: Response): void => {
     console.error('Error getting artist:', error);
     res.status(500).json({ message: 'Failed to retrieve artist' });
   }
-};
+}
 
 /**
  * Create a new artist
  */
-export const createArtist = (req: Request, res: Response): void => {
+export function createArtist(req: Request, res: Response): void {
   try {
     const artistData: CreateArtistDto = req.body;
     
@@ -61,12 +61,12 @@ export const createArtist = (req: Request, res: Response): void => {
     console.error('Error creating artist:', error);
     res.status(500).json({ message: 'Failed to create artist' });
   }
-};
+}
 
 /**
  * Update an artist
  */
-export const updateArtist = (req: Request, res: Response): void => {
+export function updateArtist(req: Request, res: Response): void {
   try {
     const { id } = req.params;
     const updateData: UpdateArtistDto = req.body;
@@ -94,12 +94,12 @@ export const updateArtist = (req: Request, res: Response): void => {
     console.error('Error updating artist:', error);
     res.status(500).json({ message: 'Failed to update artist' });
   }
-};
+}
 
 /**
  * Delete an artist
  */
-export const deleteArtist = (req: Request, res: Response): void => {
+export function deleteArtist(req: Request, res: Response): void {
   try {
     const { id } = req.params;
     
@@ -120,12 +120,12 @@ export const deleteArtist = (req: Request, res: Response): void => {
     console.error('Error deleting artist:', error);
     res.status(500).json({ message: 'Failed to delete artist' });
   }
-};
+}
 
 /**
  * Get analytics for an artist
  */
-export const getAnalytics = (req: Request, res: Response): void => {
+export function getAnalytics(req: Request, res: Response): void {
   try {
     // In a real app, we'd get the current user/artist from auth
     // For this toy app, we'll just return analytics for all tracks
@@ -140,4 +140,4 @@ export const getAnalytics = (req: Request, res: Response): void => {
     console.error('Error getting analytics:', error);
     res.status(500).json({ message: 'Failed to retrieve analytics' });
   }
-}; 
+} 
