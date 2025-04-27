@@ -1,6 +1,6 @@
 # Music App Express Backend
 
-A TypeScript-based Express.js backend for a music application.
+A TypeScript-based Express.js backend for a music application with in-memory data storage.
 
 ## Project Structure
 
@@ -13,12 +13,17 @@ music-app-express-backend/
 │   ├── routes/          # API routes
 │   ├── services/        # Business logic
 │   └── index.ts         # Entry point
-├── .env.example         # Example environment variables
 ├── .gitignore           # Git ignore file
 ├── package.json         # Dependencies and scripts
 ├── tsconfig.json        # TypeScript configuration
 └── README.md            # Project documentation
 ```
+
+## About the App
+
+This is a toy music app backend with in-memory data storage (no database). It provides endpoints for managing artists and music tracks, streaming, downloading, and analytics.
+
+All data is stored in memory and will be lost when the server restarts. The app initializes with mock data for artists and tracks for demonstration purposes.
 
 ## Getting Started
 
@@ -42,12 +47,6 @@ music-app-express-backend/
    yarn install
    ```
 
-3. Set up environment variables
-   ```sh
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
 ### Development
 
 Start the development server with hot reloading:
@@ -56,6 +55,8 @@ npm run dev
 # or
 yarn dev
 ```
+
+The server will run on port 3000 by default.
 
 ### Building for Production
 
@@ -74,6 +75,37 @@ yarn start
 ```
 
 ## API Endpoints
+
+### Music Endpoints
+
+- `GET /api/music` - Get all music tracks
+- `POST /api/music` - Create a new music track
+  - Request body: `{ "title": "Song Title", "artistId": "artist-uuid", "genre": "Pop", "duration": 180 }`
+
+- `GET /api/music/:id/stream` - Stream a music track
+  - Returns: JSON with a mocked streaming URL
+
+- `GET /api/music/:id/download` - Download a music track
+  - Returns: JSON with a mocked download path for an MP4 file
+
+- `POST /api/music/:id/favorite` - Mark a track as favorite
+  - Toggles the favorite status of the track
+
+### Artist Endpoints
+
+- `GET /api/artists` - Get all artists
+- `POST /api/artists` - Create a new artist
+  - Request body: `{ "name": "Artist Name", "genre": "Pop", "bio": "Artist biography" }`
+- `GET /api/artists/:id` - Get an artist by ID
+- `PUT /api/artists/:id` - Update an artist
+  - Request body: `{ "name": "Updated Name", "genre": "Updated Genre", "bio": "Updated bio" }`
+- `DELETE /api/artists/:id` - Delete an artist
+- `GET /api/artists/:artistId/tracks` - Get all tracks for an artist
+
+- `GET /api/artist/analytics` - Get analytics for the current user
+  - Returns: Statistics about tracks, favorites, and streaming
+
+### Other Endpoints
 
 - `GET /health` - Health check endpoint
 - `GET /api` - Welcome message

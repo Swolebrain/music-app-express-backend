@@ -1,15 +1,11 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { routes } from './routes';
 
-// Load environment variables
-dotenv.config();
-
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // Middleware
 app.use(express.json());
@@ -31,7 +27,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   console.error(err.stack);
   res.status(500).json({
     message: 'Internal Server Error',
-    error: process.env.NODE_ENV === 'production' ? {} : err
+    error: err
   });
 });
 
